@@ -8,5 +8,6 @@
 		['GET', '/users', 'User#listUsers', 'users_list'],
 		['GET|POST', '/salon/[i:id]', 'Salon#seeSalon', 'see_salon'], // [i:id] i pour vérifier que c'est un int et :id correspond au paramètre $id de la fonction
 		['GET|POST', '/login', 'User#login', 'login'],
-		['GET', '/logout', 'User#logout', 'logout']
+		['GET', '/logout', 'User#logout', 'logout'],
+		['GET|POST', '/register', 'User#register', 'register']
 	);

@@ -31,16 +31,18 @@ class UserController extends BaseController
 			// Vérif de la non vacuité du pseudo en POST
 			if(empty($_POST['pseudo'])) {
 				// Si le pseudo est vide ou inexistant on ajoute un message d'erreur
+				$this->getFlashMessenger()->error('Veuillez entrer un pseudo');
 			}
 
 			// Vérif de la non vacuité du mot de passe en POST
 			if(empty($_POST['mot_de_passe'])) {
 				// Si le mot de passe est vide ou inexistant on ajoute un message d'erreur
+				$this->getFlashMessenger()->error('Veuillez entrer un mot de passe');
 			}
 			
 			$auth = new AuthentificationModel();
 
-			if(!empty($_POST['pseudo']) && !empty($_POST['mot_de_passe'])) {
+			if(! $this->getFlashMessenger()->hasErrors() ) {
 				// Vérif de l'existance de l'utilisateur
 
 				$idUser = $auth->isValidLoginInfo($_POST['pseudo'], $_POST['mot_de_passe']);
@@ -59,6 +61,7 @@ class UserController extends BaseController
 				
 				} else {
 					// les infos de connexion sont incorrectes
+					$this->getFlashMessenger()->error('Vos informations de connexion sont incorrectes');
 				}
 			}
 		}
@@ -99,6 +102,12 @@ class UserController extends BaseController
 		$auth->logUserOut();
 		
 		$this->redirectToRoute('login');
+	}
+
+
+	public function register() {
+
+		$this->show('users/register');
 	}
 
 }

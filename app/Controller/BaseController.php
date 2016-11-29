@@ -4,6 +4,7 @@ namespace Controller;
 
 use \W\Controller\Controller;
 use \Model\SalonsModel;
+use \Plasticbrain\FlashMessages\FlashMessages;
 
 class BaseController extends Controller
 {
@@ -11,6 +12,12 @@ class BaseController extends Controller
 	* Ce champ va contenir l'engine de Plates qui va servir à afficher mes vues
 	*/
 	protected $engine;
+
+	
+	/*
+	* Ce champ va contenir une instance de flash messenger de php-flash-messages
+	*/
+	protected $fmsg;
 
 	public function __construct() {
 		
@@ -23,14 +30,18 @@ class BaseController extends Controller
 
 		$salonsModel = new SalonsModel();
 
+		$this->fmsg = new FlashMessages(); // en l'instanciant dans le constructeur on pourra utiliser fmsg direct sans instancier l'objet a chaque fois
+
 		$this->engine->addData(
 			[
 				'w_user' 		  => $this->getUser(),
 				'w_current_route' => $app->getCurrentRoute(),
 				'w_site_name'	  => $app->getConfig('site_name'),
-				'salons'	  	  => $salonsModel->findall()
+				'salons'	  	  => $salonsModel->findall(),
+				'fmsg'			  => $this->getFlashMessenger()
 			]
 		);
+
 	}
 
 	public function show($file, array $data = array()) {
@@ -48,5 +59,12 @@ class BaseController extends Controller
 	*/
 	public function addGlobalData(array $datas) {
 		$this->engine->addData($datas);
+	}
+
+	/*
+	* Retourne une instance du flash messenger de php-flash-messages
+	*/
+	public function getFlashMessenger() {
+		return $this->fmsg;
 	}
 }

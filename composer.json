@@ -20,7 +20,8 @@
         "ircmaxell/password-compat": "^1.0",
         "league/url": "^3.3",
         "phpmailer/phpmailer": "^5.2",
-        "plasticbrain/php-flash-messages": "^1.0"
+        "plasticbrain/php-flash-messages": "^1.0",
+        "respect/validation": "^1.1"
     },
     "autoload": {
         "psr-4": {
