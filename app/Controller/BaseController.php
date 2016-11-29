@@ -15,7 +15,7 @@ class BaseController extends Controller
 	public function __construct() {
 		
 		// On stocke dans la variable de classe engine une instance de league\Plates\engine alors que cette instance était créee directement dans la méthode show() de Controller
-		$this->engine = new \League\Plates\Engine(self::PATH_VIEWS)
+		$this->engine = new \League\Plates\Engine(self::PATH_VIEWS);
 
 		$this->engine->loadExtension(new \W\View\Plates\PlatesExtensions());
 
@@ -28,7 +28,7 @@ class BaseController extends Controller
 				'w_user' 		  => $this->getUser(),
 				'w_current_route' => $app->getCurrentRoute(),
 				'w_site_name'	  => $app->getConfig('site_name'),
-				'salons'	  	  => $salonsModel->findall();
+				'salons'	  	  => $salonsModel->findall()
 			]
 		);
 	}

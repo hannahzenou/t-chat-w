@@ -21,14 +21,22 @@
 
 			<nav>
 				<ul id="menu-salons">
+
+				<?php foreach($salons as $salon) : ?>
+
+				<li><a href="<?php echo $this->url('see_salon', array('id'=>$salon['id']))?>"><?php echo $this->e($salon['nom']) ; ?> </a></li>
+
+				<?php endforeach ; ?>
+
+
 					<li>
 						<a class="button" href="<?php echo $this->url('users_list')?>" title="Liste des utilisateurs">Liste des utilisateurs</a>
 					</li>
 					<li>
-						<a class="button" href="deconnexion.php" title="Se déconnecter de T'Chat">Déconnexion</a>
+						<a class="button" href="<?php echo $this->url('logout'); ?>" title="Se déconnecter de T'Chat">Déconnexion</a>
 					</li>
 				</ul>
-			</nav>			
+			</nav>
 		</aside><main>
 
 		<section>
